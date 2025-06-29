@@ -51,7 +51,7 @@ The Student Management API allows administrators to create, read, update, and de
 
 ## 📓 DTO MODEL PLAN
 
-![image](https://github.com/user-attachments/assets/dfacd6ac-7dc0-48df-bf71-6310b63e474d)
+![image](https://github.com/user-attachments/assets/6ac35fd6-16ba-4321-8c7f-3da02a8089ac)
 
 
 ## 📝 API Usage Examples
