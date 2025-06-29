@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuppressWarnings("unused")
 public class StudentResponseDto {
 
 	private long id;

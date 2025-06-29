@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonb.dto.StudentRequestDto;
 import com.marlonb.dto.StudentResponseDto;
+import com.marlonb.dto.StudentUpdateDto;
 import com.marlonb.entity.Student;
 import com.marlonb.mapper.StudentMapper;
 import com.marlonb.service.StudentService;
@@ -77,19 +78,20 @@ public class StudentController {
 	
 	// UPDATE: Selected student data by id
 	@PutMapping(path ="/students/{id}")
-	public ResponseEntity<StudentResponseDto> removeSelectedStudentData (@PathVariable long id) {
+	public ResponseEntity<StudentResponseDto> removeSelectedStudentData (@PathVariable long id, 
+																	    @Valid @RequestBody StudentUpdateDto updateRequest) {
 		
-		Student selectedStudent = studentService.retrieveStudentDataById(id);
-		
-		if (selectedStudent == null) {
-			return ResponseEntity.notFound().build();
+		try {
+			
+			Student updatedStudent = studentService.updateStudentDataById(id, updateRequest);
+			
+			StudentResponseDto response = StudentMapper.responseFromEntity(updatedStudent);
+			
+			return ResponseEntity.ok(response);  
+			
+		}catch (RuntimeException e) {
+			return ResponseEntity.notFound().build(); 
 		}
-		
-		Student savedUpdatedStudent = studentService.savedStudentData(selectedStudent);
-		
-		StudentResponseDto response = StudentMapper.responseFromEntity(savedUpdatedStudent);
-		
-		return ResponseEntity.ok(response);
 	}
 	
 	// DELETE: Selected student data by id
